@@ -8,17 +8,19 @@
       :ns $ quote (ns combinators.core)
       :defs $ {}
         |S $ quote
-          def S $ \f \g \x Ap f x (g x)
+          def S $ \. f.g.x
+            Ap f x $ g x
         |K $ quote
-          def K $ \x \y identity x
+          def K $ \. x.y x
         |I $ quote
-          def I $ \x identity x
+          def I $ \. x x
         |B $ quote
-          def B $ \x \y \z Ap x (y z)
+          def B $ \. x.y.z
+            Ap x y $ y z
         |C $ quote
-          def C $ \x \y \z Ap x z y
+          def C $ \. x.y.z (Ap x z y)
         |W $ quote
-          def W $ \x \y Ap x y y
+          def W $ \. x.y (Ap x y y)
         |Ap $ quote
           defn Ap (x y & xs)
             if (empty? xs)
