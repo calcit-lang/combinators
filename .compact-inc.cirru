@@ -1,7 +1,8 @@
 
 {} $ :changed
   {} $ |combinators.core
-    {} $ :changed-defs
-      {} $ |W
-        quote $ def W
-          \. x.y $ Ap x y y
+    {} $ :added-defs
+      {} $ |Y
+        quote $ def Y
+          Ap S I $ Ap S I I
+            Ap B (Ap S I) (Ap S I I)
