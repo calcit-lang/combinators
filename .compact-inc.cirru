@@ -1,9 +1,8 @@
 
 {} $ :changed
   {} $ |combinators.core
-    {} $ :changed-defs
-      {} $ |Ap
-        quote $ defn Ap (x y & xs)
-          if (empty? xs)
-            if (fn? x) (x y) ([] x y)
-            Ap (Ap x y) & xs
+    {} $ :added-defs
+      {} $ |Y
+        quote $ def Y
+          Ap S I $ Ap S I I
+            Ap B (Ap S I) (Ap S I I)

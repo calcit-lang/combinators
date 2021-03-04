@@ -2,6 +2,8 @@
 Toy scripts to try combinators
 ----
 
+> Not sure what to do yet. Just toyed describing combinators with calcit-runner.
+
 ### Usages
 
 ```cirru
