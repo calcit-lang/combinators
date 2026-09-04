@@ -165,4 +165,4 @@
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns combinators.main $ :require
-            [] combinators.core :refer $ [] S K I B C M W Ap display-name
+            combinators.core :refer $ S K I B C W Ap display-name
