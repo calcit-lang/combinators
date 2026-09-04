@@ -2,20 +2,25 @@
 Toy scripts to try combinators
 ----
 
-> Not sure what to do yet. Just toyed describing combinators with calcit-runner.
+> Experimental SKI and BCKW combinators running on Calcit 0.13.77.
 
 ### Usages
 
 ```cirru
 ns demo.main
-  :require
-    [] combinators.core :refer $ [] S K I B C M Ap
+  :require $ combinators.core :refer $ S K I B C W Ap
 
 defn main! ()
   echo $ I :a
 ```
 
-_TODO_
+Run the checked example program and its definition-attached laws:
+
+```bash
+caps --ci --strict
+calcit calcit.cirru
+calcit calcit.cirru test --require-match
+```
 
 ### License
 
