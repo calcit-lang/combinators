@@ -15,7 +15,9 @@
                 if (fn? x) (x y) ([] x y)
                 Ap (Ap x y) & xs
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:rest 'Dynamic) (:return 'Dynamic)
+              :args $ [] 'Dynamic 'Dynamic
           :tests $ []
             %{} 'TestEntry (:name |identity)
               :code $ quote
@@ -82,7 +84,9 @@
                 (= x W) 'W
                 true x
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Dynamic)
+              :args $ [] 'Dynamic
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote (ns combinators.core)
     'combinators.main $ %{} 'FileEntry
@@ -146,12 +150,16 @@
           :code $ quote
             defn main! () $ task!
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Dynamic)
+              :args $ []
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn reload! () $ task!
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Dynamic)
+              :args $ []
         'task! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn task! ()
@@ -161,7 +169,9 @@
               w-log $ Ap S K W K
               w-log $ Ap S K K W K
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Dynamic)
+              :args $ []
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns combinators.main $ :require

@@ -4,10 +4,10 @@
       :codeNil 0
       :declaredOptional 0
       :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 1
+      :schemaDynamic 4
+      :typeNone 0
       :typeNotFull 1
-      :unresolved 1
+      :unresolved 4
       :unsafeCoerce 0
     |combinators.core/B $ {} (:codeDynamic 0)
       :codeNil 0
@@ -76,10 +76,10 @@
       :codeNil 0
       :declaredOptional 0
       :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 1
+      :schemaDynamic 2
+      :typeNone 0
       :typeNotFull 1
-      :unresolved 1
+      :unresolved 2
       :unsafeCoerce 0
     |combinators.main/c-0 $ {} (:codeDynamic 0)
       :codeNil 0
@@ -176,7 +176,7 @@
       :declaredOptional 0
       :deprecatedCalls 0
       :schemaDynamic 1
-      :typeNone 1
+      :typeNone 0
       :typeNotFull 1
       :unresolved 1
       :unsafeCoerce 0
@@ -185,7 +185,7 @@
       :declaredOptional 0
       :deprecatedCalls 0
       :schemaDynamic 1
-      :typeNone 1
+      :typeNone 0
       :typeNotFull 1
       :unresolved 1
       :unsafeCoerce 0
@@ -194,7 +194,7 @@
       :declaredOptional 0
       :deprecatedCalls 0
       :schemaDynamic 1
-      :typeNone 1
+      :typeNone 0
       :typeNotFull 1
       :unresolved 1
       :unsafeCoerce 0
@@ -202,10 +202,10 @@
     :codeNil 0
     :declaredOptional 0
     :deprecatedCalls 0
-    :schemaDynamic 22
-    :typeNone 7
+    :schemaDynamic 26
+    :typeNone 2
     :typeNotFull 7
-    :unresolved 22
+    :unresolved 26
     :unsafeCoerce 0
   :scope $ {} (:includeDependencies false)
     :namespace nil
