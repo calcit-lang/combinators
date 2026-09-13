@@ -2,7 +2,7 @@
 Toy scripts to try combinators
 ----
 
-> Experimental SKI and BCKW combinators running on Calcit 0.13.78.
+> Experimental SKI and BCKW combinators running on Calcit 0.14.16.
 
 ### Usages
 
