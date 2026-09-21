@@ -27,24 +27,6 @@
       :typeNotFull 0
       :unresolved 1
       :unsafeCoerce 0
-    |combinators.core/I $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 0
-      :unresolved 1
-      :unsafeCoerce 0
-    |combinators.core/K $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 0
-      :unresolved 1
-      :unsafeCoerce 0
     |combinators.core/S $ {} (:codeDynamic 0)
       :codeNil 0
       :declaredOptional 0
@@ -81,25 +63,7 @@
       :typeNotFull 1
       :unresolved 2
       :unsafeCoerce 0
-    |combinators.main/c-0 $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 1
-      :typeNotFull 1
-      :unresolved 1
-      :unsafeCoerce 0
     |combinators.main/c-and $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 0
-      :unresolved 1
-      :unsafeCoerce 0
-    |combinators.main/c-false $ {} (:codeDynamic 0)
       :codeNil 0
       :declaredOptional 0
       :deprecatedCalls 0
@@ -162,15 +126,6 @@
       :typeNotFull 0
       :unresolved 1
       :unsafeCoerce 0
-    |combinators.main/c-true $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 0
-      :unresolved 1
-      :unsafeCoerce 0
     |combinators.main/main! $ {} (:codeDynamic 0)
       :codeNil 0
       :declaredOptional 0
@@ -202,10 +157,10 @@
     :codeNil 0
     :declaredOptional 0
     :deprecatedCalls 0
-    :schemaDynamic 26
-    :typeNone 2
-    :typeNotFull 7
-    :unresolved 26
+    :schemaDynamic 21
+    :typeNone 1
+    :typeNotFull 6
+    :unresolved 21
     :unsafeCoerce 0
   :scope $ {} (:includeDependencies false)
     :namespace nil
