@@ -2,15 +2,17 @@
 Toy scripts to try combinators
 ----
 
-> Experimental SKI and BCKW combinators running on Calcit 0.14.16.
+> Experimental SKI and BCKW combinators running on Calcit 0.17.1.
 
 ### Usages
 
 ```cirru
-ns demo.main
-  :require $ combinators.core :refer $ S K I B C W Ap
+ns demo.main $ :require $ combinators.core :refer (S K I B C W Ap)
 
 defn main! ()
+  hint-fn $ {}
+    :args $ []
+    :return 'Tag
   echo $ I :a
 ```
 

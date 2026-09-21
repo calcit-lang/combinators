@@ -42,13 +42,19 @@
           :code $ quote $ def I
             fn (x) x
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn $ {} (:return 'T)
+            :args $ [] 'T
+            :generics $ [] 'T
         'K $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def K
             fn (x)
               fn (y) x
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn $ {}
+            :args $ [] 'T
+            :generics $ [] 'T 'U
+            :return $ :: 'Fn $ {} (:return 'T)
+              :args $ [] 'U
         'S $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def S
             fn (f)
@@ -89,7 +95,9 @@
         'c-0 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-0 I
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn $ {} (:return 'T)
+            :args $ [] 'T
+            :generics $ [] 'T
         'c-and $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-and
             fn (x)
@@ -101,7 +109,11 @@
             fn (x)
               fn (y) y
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn $ {}
+            :args $ [] 'T
+            :generics $ [] 'T 'U
+            :return $ :: 'Fn $ {} (:return 'U)
+              :args $ [] 'U
         'c-left $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-left
             fn (x) (Ap x c-true)
@@ -140,7 +152,11 @@
             fn (x)
               fn (y) x
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn $ {}
+            :args $ [] 'T
+            :generics $ [] 'T 'U
+            :return $ :: 'Fn $ {} (:return 'T)
+              :args $ [] 'U
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn main! () (task!)
           :examples $ []
