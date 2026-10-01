@@ -2,7 +2,11 @@
 Toy scripts to try combinators
 ----
 
-> Experimental SKI and BCKW combinators running on Calcit 0.17.1.
+> Experimental SKI and BCKW combinators running on Calcit 0.27.0.
+
+Canonical sources are `calcit.cirru` and `deps.cirru`; CI rejects retired
+`compact.cirru` and `package.cirru`. This native-only example has no frontend
+assets to deploy to COS. Existing quality debt is tracked by the unchanged baseline.
 
 ### Usages
 
