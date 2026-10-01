@@ -3,7 +3,7 @@
   :about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`."
   :package |combinators
   :entries $ {} $ :default
-    {} (:description |) (:init-fn 'combinators.main/main!) (:mode :native) (:reload-fn 'combinators.main/reload!)
+    {} (:description |) (:init-fn 'combinators.main/main!) (:mode :native) (:reload-fn 'combinators.main/reload!) (:target :native)
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
@@ -101,9 +101,15 @@
         'c-and $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-and
             fn (x)
-              fn (y) (Ap x y f)
+              fn (y) (Ap x y c-false)
           :examples $ []
           :schema $ :: 'Dynamic
+          :tests $ [] $ %{} 'TestEntry (:name |truth-table)
+            :code $ quote $ do
+              assert= :yes $ Ap c-and c-true c-true :yes :no
+              assert= :no $ Ap c-and c-true c-false :yes :no
+              assert= :no $ Ap c-and c-false c-true :yes :no
+              assert= :no $ Ap c-and c-false c-false :yes :no
         'c-false $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-false
             fn (x)
@@ -127,9 +133,15 @@
         'c-or $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-or
             fn (x)
-              fn (y) (Ap x t y)
+              fn (y) (Ap x c-true y)
           :examples $ []
           :schema $ :: 'Dynamic
+          :tests $ [] $ %{} 'TestEntry (:name |truth-table)
+            :code $ quote $ do
+              assert= :yes $ Ap c-or c-true c-true :yes :no
+              assert= :yes $ Ap c-or c-true c-false :yes :no
+              assert= :yes $ Ap c-or c-false c-true :yes :no
+              assert= :no $ Ap c-or c-false c-false :yes :no
         'c-pair $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-pair
             fn (x)
@@ -139,9 +151,12 @@
           :schema $ :: 'Dynamic
         'c-right $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-right
-            fn (x) (Ap x f)
+            fn (x) (Ap x c-false)
           :examples $ []
           :schema $ :: 'Dynamic
+          :tests $ [] $ %{} 'TestEntry (:name |pair-selection)
+            :code $ quote $ assert= :right
+              Ap c-right $ Ap c-pair :left :right
         'c-succ $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-succ
             fn (x) (Ap c-pair c-false)
