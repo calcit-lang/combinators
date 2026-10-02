@@ -2,7 +2,7 @@
 Toy scripts to try combinators
 ----
 
-> Experimental SKI and BCKW combinators running on Calcit 0.27.0.
+> SKI 与 BCKW 组合子实验，使用正式 Calcit 0.28.0。
 
 Canonical sources are `calcit.cirru` and `deps.cirru`; CI rejects retired
 `compact.cirru` and `package.cirru`. This native-only example has no frontend
