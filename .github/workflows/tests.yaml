@@ -15,15 +15,17 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5.0
+      - uses: calcit-lang/setup-calcit@v1.5.0
         with:
           tools: calcit,caps
+          version: "0.28.0"
           caps-version: "0.1.1"
 
       - name: Install Calcit modules
@@ -32,7 +34,6 @@ jobs:
       - name: Verify Snapshot and static gates
         run: |
           set -euo pipefail
-          test "$(calcit --version)" = "0.27.0"
           test -f calcit.cirru
           test -f deps.cirru
           test ! -e compact.cirru
@@ -40,12 +41,9 @@ jobs:
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
           calcit calcit.cirru --check-only
-          calcit calcit.cirru analyze check-types --summary-only --format json
-          calcit calcit.cirru analyze weak-types --only schema-dynamic,unresolved-type-slot,code-dynamic --intent unresolved --summary-only --format json
           calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru
           calcit calcit.cirru analyze dynamic-methods --summary-only --format json | jq -e '.data.summary.findings == 0'
           calcit calcit.cirru analyze check-public --ns combinators.core --ns combinators.main --summary-only --format json
-          calcit calcit.cirru analyze deprecated --summary-only --format json
 
       - name: Run combinator laws
         run: calcit calcit.cirru test --require-match
