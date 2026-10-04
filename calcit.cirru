@@ -175,12 +175,12 @@
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn main! () (task!)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Dynamic)
+          :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (task!)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Dynamic)
+          :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
         'task! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn task! ()
@@ -189,8 +189,9 @@
             w-log $ Ap W 'x 'y
             w-log $ Ap S K W K
             w-log $ Ap S K K W K
+            , &unit
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Dynamic)
+          :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns combinators.main
