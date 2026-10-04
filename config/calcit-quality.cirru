@@ -126,41 +126,14 @@
       :typeNotFull 0
       :unresolved 1
       :unsafeCoerce 0
-    |combinators.main/main! $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 1
-      :unresolved 1
-      :unsafeCoerce 0
-    |combinators.main/reload! $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 1
-      :unresolved 1
-      :unsafeCoerce 0
-    |combinators.main/task! $ {} (:codeDynamic 0)
-      :codeNil 0
-      :declaredOptional 0
-      :deprecatedCalls 0
-      :schemaDynamic 1
-      :typeNone 0
-      :typeNotFull 1
-      :unresolved 1
-      :unsafeCoerce 0
   :metrics $ {} (:codeDynamic 0)
     :codeNil 0
     :declaredOptional 0
     :deprecatedCalls 0
-    :schemaDynamic 21
+    :schemaDynamic 18
     :typeNone 1
-    :typeNotFull 6
-    :unresolved 21
+    :typeNotFull 3
+    :unresolved 18
     :unsafeCoerce 0
   :scope $ {} (:includeDependencies false)
     :namespace nil
