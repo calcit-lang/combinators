@@ -2,7 +2,7 @@
 Toy scripts to try combinators
 ----
 
-> SKI 与 BCKW 组合子实验，使用正式 Calcit 0.28.0。
+> SKI 与 BCKW 组合子实验，使用正式 Calcit 0.29.0。
 
 Canonical sources are `calcit.cirru` and `deps.cirru`; CI rejects retired
 `compact.cirru` and `package.cirru`. This native-only example has no frontend
@@ -19,6 +19,11 @@ markers and from 6 to 3 incomplete types. This is partial type cleanup, not a
 claim that the remaining combinators are fully typed. CI still uses the same
 strict checks, all 22 public definitions, five original laws, and native example;
 no additional validation scripts or dependencies are introduced.
+
+The 0.29.0 migration replaces the five deprecated `w-log` calls with `dbg`,
+preserving the example expressions and their evaluate-once, print-and-return
+behavior. The existing type budget is unchanged; the symbolic combinators
+remain an explicitly unfinished type boundary, not a fully typed migration.
 
 ### Usages
 

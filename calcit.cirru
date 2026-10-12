@@ -184,11 +184,11 @@
             :args $ []
         'task! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn task! ()
-            w-log $ Ap I 'x
-            w-log $ Ap S K K 'x
-            w-log $ Ap W 'x 'y
-            w-log $ Ap S K W K
-            w-log $ Ap S K K W K
+            dbg $ Ap I 'x
+            dbg $ Ap S K K 'x
+            dbg $ Ap W 'x 'y
+            dbg $ Ap S K W K
+            dbg $ Ap S K K W K
             , &unit
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
