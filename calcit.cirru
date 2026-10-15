@@ -14,7 +14,7 @@
           :code $ quote $ defn Ap (x y & xs)
             if (empty? xs)
               if (fn? x) (x y) ([] x y)
-              .foldl xs (Ap x y) Ap
+              .fold xs (Ap x y) Ap
           :examples $ []
           :schema $ :: 'Fn $ {} (:rest 'Dynamic) (:return 'Dynamic)
             :args $ [] 'Dynamic 'Dynamic
