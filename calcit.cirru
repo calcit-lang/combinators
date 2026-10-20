@@ -28,9 +28,18 @@
             fn (x)
               fn (y)
                 fn (z)
-                  Ap x y $ y z
+                  Ap x $ Ap y z
           :examples $ []
           :schema $ :: 'Dynamic
+          :tests $ [] $ %{} 'TestEntry (:name |composition)
+            :code $ quote $ do
+              assert= 3 $ Ap B inc inc 1
+              assert= 7 $ Ap B inc
+                fn (n) (* n 2)
+                , 3
+              assert=
+                [] 'f $ [] 'g 'x
+                Ap B 'f 'g 'x
         'C $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def C
             fn (x)

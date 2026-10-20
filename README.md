@@ -5,13 +5,16 @@ Toy scripts to try combinators
 > SKI 与 BCKW 组合子实验，使用 Calcit 0.30.1-alpha.5 候选。
 
 本轮不改变五项演示输出、符号应用或变参合同，无前端及部署影响。
-正式 0.30.1 release 尚无 CLI 资产，故明确固定已发布候选，不冒称正式版。
+正式 0.30.1 的跨平台 CLI/npm 配对发布尚未完整，故明确固定已发布候选，不冒称正式版。
 全部定义、完整 strict、原五项定律与原质量基线必须通过；不新增改写规则、
 验证脚本或依赖，也不放宽类型预算。剩余高阶/符号应用边界仍需审阅，
 并不因为工具链升级就视为已完全类型化。
-额外语义探测发现 B 的一元函数复合在新旧工具链均失败，原五项定律并未覆盖它；
-详见 [issue #17](https://github.com/calcit-lang/combinators/issues/17)。
-本轮工具链迁移不悄然改变该公开组合子的行为。
+迁移后独立修复 [issue #17](https://github.com/calcit-lang/combinators/issues/17)：
+B 现在按 `B f g x = f (g x)` 复合，而不是先把函数 g 本身传给 f；
+`Ap B inc inc 1` 返回 3。两层应用都经过原 `Ap`，因此符号输入仍构造嵌套 List，
+例如 `Ap B 'f 'g 'x` 得到 `[] 'f ([] 'g 'x)`。依赖旧 B 错误行为的实验会改变结果。
+原五项定律和演示输出不变，新增 B 的一项附带定律覆盖数值、复合顺序和符号应用。
+这不等于其他组合子（包括引用 B 的 Y）已完成语义验收；原有类型债务及预算不变。
 
 Canonical sources are `calcit.cirru` and `deps.cirru`; CI rejects retired
 `compact.cirru` and `package.cirru`. This native-only example has no frontend
