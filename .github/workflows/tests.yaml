@@ -40,7 +40,7 @@ jobs:
           test ! -e package.cirru
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
-          calcit calcit.cirru --check-only
+          calcit calcit.cirru --check-only --all-defs
           calcit calcit.cirru fix --workflow strict --verify --format json
           calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru
           calcit calcit.cirru analyze weak-types --only dynamic-method --summary-only --format json | jq -e '.data.summary.findings == 0'
