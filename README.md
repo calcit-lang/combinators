@@ -2,7 +2,12 @@
 Toy scripts to try combinators
 ----
 
-> SKI 与 BCKW 组合子实验，使用正式 Calcit 0.30.1。
+> SKI 与 BCKW 组合子实验，当前候选使用正式 Calcit 0.31.0。
+
+使用者影响：本轮只升级原生 CLI；项目没有 npm runtime 或前端。保留源码、符号应用、
+变参合同、原演示和定律，不放宽 strict 或质量预算，不发布模块 tag。
+
+### 0.30.1 历史迁移
 
 本轮不改变五项演示输出、符号应用或变参合同，无前端及部署影响。
 本轮将 CLI 从 alpha.5 切到正式 0.30.1；项目仅运行原生 Calcit，没有 npm runtime，
