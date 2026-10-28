@@ -16,8 +16,7 @@
               if (fn? x) (x y) ([] x y)
               .fold xs (Ap x y) Ap
           :examples $ []
-          :schema $ :: 'Fn $ {} (:rest 'Dynamic) (:return 'Dynamic)
-            :args $ [] 'Dynamic 'Dynamic
+          :schema $ quote $ Fn Dynamic Dynamic & Dynamic (-> Dynamic)
           :tests $ []
             %{} 'TestEntry (:name |identity)
               :code $ quote $ assert= 'x (Ap I 'x)
@@ -30,7 +29,7 @@
                 fn (z)
                   Ap x $ Ap y z
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
           :tests $ [] $ %{} 'TestEntry (:name |composition)
             :code $ quote $ do
               assert= 3 $ Ap B inc inc 1
@@ -46,24 +45,20 @@
               fn (y)
                 fn (z) (Ap x z y)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'I $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def I
             fn (x) x
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'T)
-            :args $ [] 'T
-            :generics $ [] 'T
+          :schema $ quote $ Fn T (-> T) (:generics T)
         'K $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def K
             fn (x)
               fn (y) x
           :examples $ []
-          :schema $ :: 'Fn $ {}
-            :args $ [] 'T
-            :generics $ [] 'T 'U
-            :return $ :: 'Fn $ {} (:return 'T)
-              :args $ [] 'U
+          :schema $ quote $ Fn T
+            -> $ Fn U $ -> T
+            :generics T U
         'S $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def S
             fn (f)
@@ -71,18 +66,18 @@
                 fn (x)
                   Ap f x $ g x
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'W $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def W
             fn (x)
               fn (y) (Ap x y y)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'Y $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Y
             Ap S I $ Ap S I I $ Ap B (Ap S I) (Ap S I I)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'display-name $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn display-name (x)
             cond
@@ -95,8 +90,7 @@
               (= x W) 'W
               true x
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Dynamic)
-            :args $ [] 'Dynamic
+          :schema $ quote $ Fn Dynamic (-> Dynamic)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns combinators.core
     'combinators.main $ %{} 'FileEntry
@@ -104,15 +98,13 @@
         'c-0 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-0 I
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'T)
-            :args $ [] 'T
-            :generics $ [] 'T
+          :schema $ quote $ Fn T (-> T) (:generics T)
         'c-and $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-and
             fn (x)
               fn (y) (Ap x y c-false)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
           :tests $ [] $ %{} 'TestEntry (:name |truth-table)
             :code $ quote $ do
               assert= :yes $ Ap c-and c-true c-true :yes :no
@@ -124,27 +116,25 @@
             fn (x)
               fn (y) y
           :examples $ []
-          :schema $ :: 'Fn $ {}
-            :args $ [] 'T
-            :generics $ [] 'T 'U
-            :return $ :: 'Fn $ {} (:return 'U)
-              :args $ [] 'U
+          :schema $ quote $ Fn T
+            -> $ Fn U $ -> U
+            :generics T U
         'c-left $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-left
             fn (x) (Ap x c-true)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'c-not $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-not
             fn (x) (Ap x c-false c-true)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'c-or $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-or
             fn (x)
               fn (y) (Ap x c-true y)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
           :tests $ [] $ %{} 'TestEntry (:name |truth-table)
             :code $ quote $ do
               assert= :yes $ Ap c-or c-true c-true :yes :no
@@ -157,12 +147,12 @@
               fn (y)
                 fn (z) (Ap z x y)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'c-right $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-right
             fn (x) (Ap x c-false)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
           :tests $ [] $ %{} 'TestEntry (:name |pair-selection)
             :code $ quote $ assert= :right
               Ap c-right $ Ap c-pair :left :right
@@ -170,27 +160,23 @@
           :code $ quote $ def c-succ
             fn (x) (Ap c-pair c-false)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ quote Dynamic
         'c-true $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-true
             fn (x)
               fn (y) x
           :examples $ []
-          :schema $ :: 'Fn $ {}
-            :args $ [] 'T
-            :generics $ [] 'T 'U
-            :return $ :: 'Fn $ {} (:return 'T)
-              :args $ [] 'U
+          :schema $ quote $ Fn T
+            -> $ Fn U $ -> T
+            :generics T U
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn main! () (task!)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (task!)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
         'task! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn task! ()
             dbg $ Ap I 'x
@@ -200,8 +186,7 @@
             dbg $ Ap S K K W K
             , &unit
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns combinators.main
           :require $ combinators.core :refer $ S K I B C W Ap display-name
