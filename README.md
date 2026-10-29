@@ -2,10 +2,13 @@
 Toy scripts to try combinators
 ----
 
-> SKI 与 BCKW 组合子实验，当前候选使用正式 Calcit 0.31.0。
+> SKI 与 BCKW 组合子实验，当前候选使用正式 Calcit 0.32.0。
 
-使用者影响：本轮只升级原生 CLI；项目没有 npm runtime 或前端。保留源码、符号应用、
+使用者影响：本轮升级原生 CLI，并用官方 format 迁移类型标注；项目没有 npm runtime 或前端。保留运行逻辑、符号应用、
 变参合同、原演示和定律，不放宽 strict 或质量预算，不发布模块 tag。
+
+Calcit 0.32.0 的 native `identical?` 对容器改为身份比较；结构值比较应使用 `=`。
+本次保留原组合子定律与预算，不把工具链升级当作所有高阶边界已完全类型化。
 
 ### 0.30.1 历史迁移
 
@@ -59,9 +62,7 @@ pass; the existing 18-marker budget and all five laws remain unchanged.
 ns demo.main $ :require $ combinators.core :refer (S K I B C W Ap)
 
 defn main! ()
-  hint-fn $ {}
-    :args $ []
-    :return 'Unit
+  hint-fn $ Fn (-> Unit)
   echo $ I :a
 ```
 
