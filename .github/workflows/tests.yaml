@@ -39,9 +39,9 @@ jobs:
           test ! -e compact.cirru
           test ! -e package.cirru
           calcit calcit.cirru edit format
-          git diff --exit-code -- calcit.cirru
+          git diff --exit-code --quiet -- calcit.cirru
           calcit calcit.cirru --check-only --all-defs
-          calcit calcit.cirru fix --workflow strict --verify --format json
+          calcit calcit.cirru fix --workflow strict --verify --format json | jq -e '.data.workflow.status == "passed" and .diagnostics == []'
           calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru
           calcit calcit.cirru analyze weak-types --only dynamic-method --summary-only --format json | jq -e '.data.summary.findings == 0'
           calcit calcit.cirru --check-only --ns combinators.core --ns combinators.main --summary-only --format json

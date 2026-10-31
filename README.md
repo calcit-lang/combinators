@@ -1,79 +1,54 @@
+# Toy Combinators
 
-Toy scripts to try combinators
-----
+SKI 与 BCKW 组合子实验，使用正式 Calcit **0.32.1** 原生运行。
 
-> SKI 与 BCKW 组合子实验，当前候选使用正式 Calcit 0.32.0。
+## 对使用者的影响
 
-使用者影响：本轮升级原生 CLI，并用官方 format 迁移类型标注；项目没有 npm runtime 或前端。保留运行逻辑、符号应用、
-变参合同、原演示和定律，不放宽 strict 或质量预算，不发布模块 tag。
+本轮升级原生 CLI，保留组合子运行逻辑、符号应用、变参合同、原演示和定律。
+项目没有 npm runtime、JS 构建或前端，不为配对工具链引入 `package.json`、COS 或部署步骤。
+不发布模块 tag，不将现有高阶/符号边界当作已完全类型化。
 
-Calcit 0.32.0 的 native `identical?` 对容器改为身份比较；结构值比较应使用 `=`。
-本次保留原组合子定律与预算，不把工具链升级当作所有高阶边界已完全类型化。
+0.32 类型标注迁移已在前轮完成；本次 Snapshot、schema、原测试和质量基线保持不变。
+`Ap` 同时处理函数与符号，额外参数仍按原顺序左折叠；符号输入构造嵌套 List，不改写为普通函数调用。
+`display-name` 对非已知组合子保留原值，因此仍是开放返回边界，不伪造 String 返回类型。
 
-### 0.30.1 历史迁移
+## 运行与门禁
 
-本轮不改变五项演示输出、符号应用或变参合同，无前端及部署影响。
-本轮将 CLI 从 alpha.5 切到正式 0.30.1；项目仅运行原生 Calcit，没有 npm runtime，
-不为配对版本额外引入 package.json 或 JS 构建。源码和现有类型预算保持不变。
-全部定义、完整 strict、原五项定律与原质量基线必须通过；不新增改写规则、
-验证脚本或依赖，也不放宽类型预算。剩余高阶/符号应用边界仍需审阅，
-并不因为工具链升级就视为已完全类型化。
-迁移后独立修复 [issue #17](https://github.com/calcit-lang/combinators/issues/17)：
-B 现在按 `B f g x = f (g x)` 复合，而不是先把函数 g 本身传给 f；
-`Ap B inc inc 1` 返回 3。两层应用都经过原 `Ap`，因此符号输入仍构造嵌套 List，
-例如 `Ap B 'f 'g 'x` 得到 `[] 'f ([] 'g 'x)`。依赖旧 B 错误行为的实验会改变结果。
-原五项定律和演示输出不变，新增 B 的一项附带定律覆盖数值、复合顺序和符号应用。
-这不等于其他组合子（包括引用 B 的 Y）已完成语义验收；原有类型债务及预算不变。
+项目使用 `calcit.cirru` 和 `deps.cirru`，不恢复 `compact.cirru` 或 `package.cirru`。
 
-Canonical sources are `calcit.cirru` and `deps.cirru`; CI rejects retired
-`compact.cirru` and `package.cirru`. This native-only example has no frontend
-assets to deploy to COS. Existing quality debt is tracked by a lowering-only baseline.
+```sh
+caps --ci --strict
+calcit calcit.cirru --check-only --all-defs
+calcit calcit.cirru fix --workflow strict --verify
+calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru
+calcit calcit.cirru test --require-match
+calcit calcit.cirru
+```
 
-`main!`, `reload!`, and `task!` now return `Unit`: they run the demonstration for
-its printed output, rather than returning its last combinator expression. The
-five logged expressions and the original attached laws are unchanged. Symbolic
-application in `Ap` intentionally remains an open boundary; it must not be
-retyped as ordinary function application merely to remove `Dynamic` markers.
+保留原完整 strict、22 个公开定义、动态方法零发现检查、六项定律及五项演示，不增加 checker、依赖或防御测试。
+质量预算保持 schemaDynamic/unresolved 18、typeNotFull 3、typeNone 1，其余原零上限保持，不放宽基线。
+这些指标描述既有边界，不替代严格检查或证明所有高阶组合子完整类型化。
 
-The existing quality budget is reduced from 21 to 18 schema Dynamic/unresolved
-markers and from 6 to 3 incomplete types. This is partial type cleanup, not a
-claim that the remaining combinators are fully typed. CI still uses the same
-strict checks, all 22 public definitions, five original laws, and native example;
-no additional validation scripts or dependencies are introduced.
-
-The 0.29.0 migration replaces the five deprecated `w-log` calls with `dbg`,
-preserving the example expressions and their evaluate-once, print-and-return
-behavior. The existing type budget is unchanged; the symbolic combinators
-remain an explicitly unfinished type boundary, not a fully typed migration.
-
-0.29.3 keeps `Ap` variadic: additional arguments are folded left in their original
-order, preserving both function and symbolic application. This removes the open
-recursive spread without fixing the public argument count. Full strict checks
-pass; the existing 18-marker budget and all five laws remain unchanged.
-
-0.30.0 改用公开首选 List `.fold`，仍按原顺序逐项左折叠，保留变参、函数调用及
-符号 List 构造。原类型边界和 18-marker/3-incomplete 预算不放宽；本轮不冒称
-全类型化。CI 从 `deps.cirru` 读取工具链，继续使用现有 strict、原定律及演示入口，
-不新增改写规则、checker、依赖或测试框架。
-
-### Usages
+示例：
 
 ```cirru
 ns demo.main $ :require $ combinators.core :refer (S K I B C W Ap)
 
 defn main! ()
-  hint-fn $ Fn (-> Unit)
+  hint-fn $ Fn $ -> Unit
   echo $ I :a
 ```
 
-Run the checked example program and its definition-attached laws:
+## 已有语义边界
 
-```bash
-caps --ci --strict
-calcit calcit.cirru
-calcit calcit.cirru test --require-match
-```
+此前 [issue #17](https://github.com/calcit-lang/combinators/issues/17) 修正了 B 的函数复合：`B f g x = f (g x)`。
+`Ap B inc inc 1` 返回 3，符号形式 `Ap B 'f 'g 'x` 保留为 `[] 'f ([] 'g 'x)`；原附带定律保留。
+依赖旧 B 错误行为的实验会改变结果，但这不是本次 CLI patch 的新行为，也不代表 Y 等其他组合子已完成语义验收。
 
-### License
+`main!`、`reload!`、`task!` 为打印演示返回 Unit；原五项表达式不变。
+`identical?` 的容器身份比较与结构 `=` 不混用，不通过放宽比较或类型合同绕过定律。
+CI 仅运行原检查和演示，无部署步骤。
+
+## License
 
 MIT
