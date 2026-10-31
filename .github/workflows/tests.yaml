@@ -39,7 +39,10 @@ jobs:
           test ! -e compact.cirru
           test ! -e package.cirru
           calcit calcit.cirru edit format
-          git diff --exit-code --quiet -- calcit.cirru
+          if ! git diff --exit-code --quiet -- calcit.cirru; then
+            echo '::error file=calcit.cirru::Snapshot is not canonical. Run calcit edit format and inspect definitions with calcit query def.'
+            exit 1
+          fi
           calcit calcit.cirru --check-only --all-defs
           calcit calcit.cirru fix --workflow strict --verify --format json | jq -e '.data.workflow.status == "passed" and .diagnostics == []'
           calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru
