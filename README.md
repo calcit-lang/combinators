@@ -1,6 +1,6 @@
 # Toy Combinators
 
-SKI 与 BCKW 组合子实验，使用正式 Calcit **0.32.1** 原生运行。
+SKI 与 BCKW 组合子实验，使用正式 Calcit **0.34.0** 原生运行。
 
 ## 对使用者的影响
 
@@ -8,7 +8,8 @@ SKI 与 BCKW 组合子实验，使用正式 Calcit **0.32.1** 原生运行。
 项目没有 npm runtime、JS 构建或前端，不为配对工具链引入 `package.json`、COS 或部署步骤。
 不发布模块 tag，不将现有高阶/符号边界当作已完全类型化。
 
-0.32 类型标注迁移已在前轮完成；本次 Snapshot、schema、原测试和质量基线保持不变。
+升级后使用 Calcit 0.34.0 运行原命令。官方 `edit format` 确认当前 Snapshot 已规范，
+定义、schema、原测试和质量基线保持不变；`--ns` 检查保留 0.34.0 的默认 proof audit。
 `Ap` 同时处理函数与符号，额外参数仍按原顺序左折叠；符号输入构造嵌套 List，不改写为普通函数调用。
 `display-name` 对非已知组合子保留原值，因此仍是开放返回边界，不伪造 String 返回类型。
 
