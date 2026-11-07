@@ -22,6 +22,10 @@
               :code $ quote $ assert= 'x (Ap I 'x)
             %{} 'TestEntry (:name |s-k-k)
               :code $ quote $ assert= 'x (Ap S K K 'x)
+            %{} 'TestEntry (:name |symbolic-variadic)
+              :code $ quote $ assert=
+                [] ([] 'f 'a) 'b
+                Ap 'f 'a 'b
         'B $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def B
             fn (x)
