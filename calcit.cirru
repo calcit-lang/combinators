@@ -16,7 +16,7 @@
               if (fn? x) (x y) ([] x y)
               .fold xs (Ap x y) Ap
           :examples $ []
-          :schema $ quote $ Fn Dynamic Dynamic & Dynamic (-> Dynamic)
+          :schema $ quote $ Fn Dynamic Dynamic (& Dynamic) (-> Dynamic)
           :tests $ []
             %{} 'TestEntry (:name |identity)
               :code $ quote $ assert= 'x (Ap I 'x)
