@@ -23,9 +23,14 @@
             %{} 'TestEntry (:name |s-k-k)
               :code $ quote $ assert= 'x (Ap S K K 'x)
             %{} 'TestEntry (:name |symbolic-variadic)
-              :code $ quote $ assert=
-                [] ([] 'f 'a) 'b
-                Ap 'f 'a 'b
+              :code $ quote $ do
+                let
+                    nested $ [] ([] 'f 'a) 'b
+                    symbolic-head $ fn (_input)
+                      hint-fn $ Fn Symbol $ -> Symbol
+                      , 'f
+                  assert= nested $ Ap 'f 'a 'b
+                  assert= nested $ Ap symbolic-head 'unused 'a 'b
         'B $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def B
             fn (x)
