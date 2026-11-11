@@ -17,6 +17,8 @@ CI 使用 `analyze weak-types` 和 `config/weak-types-budget.json` 检查逐定�
 
 项目使用 `calcit.cirru` 和 `deps.cirru`，不恢复 `compact.cirru` 或 `package.cirru`。
 
+运行下面的类型预算检查前，请先安装 `jq`。
+
 ```sh
 caps --ci --strict
 calcit calcit.cirru --check-only --all-defs
