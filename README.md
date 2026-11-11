@@ -21,14 +21,13 @@ CI 使用 `analyze weak-types` 和 `config/weak-types-budget.json` 检查逐定�
 caps --ci --strict
 calcit calcit.cirru --check-only --all-defs
 calcit calcit.cirru fix --workflow strict --verify
-calcit calcit.cirru analyze weak-types --only coverage --coverage-level none,partial --format json
-calcit calcit.cirru analyze weak-types --format json
+bash scripts/check-weak-types.sh
 calcit calcit.cirru test --require-match
 calcit calcit.cirru
 ```
 
 保留原完整 strict、两个命名空间的 22 个定义、动态方法零发现检查、七项定律与回归及五项演示。
-质量预算保持 schemaDynamic/unresolved 18、typeNotFull 3、typeNone 1，其余原零上限保持，不放宽基线。
+本地和 CI 运行同一个逐定义预算检查，`data-dynamic` 的预算为零。现有 schemaDynamic/unresolved 18、typeNotFull 3、typeNone 1 的预算继续生效。
 这些指标描述既有边界，不替代严格检查或证明所有高阶组合子完整类型化。
 
 示例：
