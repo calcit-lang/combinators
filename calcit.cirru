@@ -16,7 +16,7 @@
               if (fn? x) (x y) ([] x y)
               .fold xs (Ap x y) Ap
           :examples $ []
-          :schema $ quote $ Fn Dynamic Dynamic (& Dynamic) (-> Dynamic)
+          :schema $ quote $ Fn X Y (& Dynamic) (-> Dynamic) (:generics X Y)
           :tests $ []
             %{} 'TestEntry (:name |identity)
               :code $ quote $ assert= 'x (Ap I 'x)
@@ -38,7 +38,10 @@
                 fn (z)
                   Ap x $ Ap y z
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
           :tests $ [] $ %{} 'TestEntry (:name |composition)
             :code $ quote $ do
               assert= 3 $ Ap B inc inc 1
@@ -54,7 +57,10 @@
               fn (y)
                 fn (z) (Ap x z y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'I $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def I
             fn (x) x
@@ -75,13 +81,18 @@
                 fn (x)
                   Ap f x $ g x
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'W $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def W
             fn (x)
               fn (y) (Ap x y y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ -> Dynamic
+            :generics X Y
         'Y $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Y
             Ap S I $ Ap S I I $ Ap B (Ap S I) (Ap S I I)
@@ -113,7 +124,9 @@
             fn (x)
               fn (y) (Ap x y c-false)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ -> Dynamic
+            :generics X Y
           :tests $ [] $ %{} 'TestEntry (:name |truth-table)
             :code $ quote $ do
               assert= :yes $ Ap c-and c-true c-true :yes :no
@@ -132,18 +145,20 @@
           :code $ quote $ def c-left
             fn (x) (Ap x c-true)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X (-> Dynamic) (:generics X)
         'c-not $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-not
             fn (x) (Ap x c-false c-true)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X (-> Dynamic) (:generics X)
         'c-or $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-or
             fn (x)
               fn (y) (Ap x c-true y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ -> Dynamic
+            :generics X Y
           :tests $ [] $ %{} 'TestEntry (:name |truth-table)
             :code $ quote $ do
               assert= :yes $ Ap c-or c-true c-true :yes :no
@@ -156,12 +171,15 @@
               fn (y)
                 fn (z) (Ap z x y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'c-right $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-right
             fn (x) (Ap x c-false)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X (-> Dynamic) (:generics X)
           :tests $ [] $ %{} 'TestEntry (:name |pair-selection)
             :code $ quote $ assert= :right
               Ap c-right $ Ap c-pair :left :right

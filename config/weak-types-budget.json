@@ -1,13 +1,23 @@
 {
   "coverage": {
     "combinators.core/Ap": "partial",
+    "combinators.core/B": "partial",
+    "combinators.core/C": "partial",
+    "combinators.core/S": "partial",
+    "combinators.core/W": "partial",
     "combinators.core/Y": "none",
-    "combinators.core/display-name": "partial"
+    "combinators.core/display-name": "partial",
+    "combinators.main/c-and": "partial",
+    "combinators.main/c-left": "partial",
+    "combinators.main/c-not": "partial",
+    "combinators.main/c-or": "partial",
+    "combinators.main/c-pair": "partial",
+    "combinators.main/c-right": "partial"
   },
   "weak": {
     "combinators.core/Ap": {
-      "schema-dynamic": 4,
-      "unresolved": 4
+      "schema-dynamic": 2,
+      "unresolved": 2
     },
     "combinators.core/B": {
       "schema-dynamic": 1,
@@ -30,8 +40,8 @@
       "unresolved": 1
     },
     "combinators.core/display-name": {
-      "schema-dynamic": 2,
-      "unresolved": 2
+      "schema-dynamic": 1,
+      "unresolved": 1
     },
     "combinators.main/c-and": {
       "schema-dynamic": 1,
