@@ -90,16 +90,16 @@
         'display-name $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn display-name (x)
             cond
-                = x S
+                &= x S
                 , 'S
-              (= x I) 'I
-              (= x K) 'K
-              (= x B) 'B
-              (= x C) 'C
-              (= x W) 'W
+              (&= x I) 'I
+              (&= x K) 'K
+              (&= x B) 'B
+              (&= x C) 'C
+              (&= x W) 'W
               true x
           :examples $ []
-          :schema $ quote $ Fn Dynamic (-> Dynamic)
+          :schema $ quote $ Fn T (-> Dynamic) (:generics T)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns combinators.core
     'combinators.main $ %{} 'FileEntry
