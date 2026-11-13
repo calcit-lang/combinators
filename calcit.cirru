@@ -187,7 +187,10 @@
           :code $ quote $ def c-succ
             fn (x) (Ap c-pair c-false)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'c-true $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-true
             fn (x)
