@@ -16,7 +16,7 @@
               if (fn? x) (x y) ([] x y)
               .fold xs (Ap x y) Ap
           :examples $ []
-          :schema $ quote $ Fn Dynamic Dynamic (& Dynamic) (-> Dynamic)
+          :schema $ quote $ Fn X Y (& Dynamic) (-> Dynamic) (:generics X Y)
           :tests $ []
             %{} 'TestEntry (:name |identity)
               :code $ quote $ assert= 'x (Ap I 'x)
@@ -38,7 +38,10 @@
                 fn (z)
                   Ap x $ Ap y z
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
           :tests $ [] $ %{} 'TestEntry (:name |composition)
             :code $ quote $ do
               assert= 3 $ Ap B inc inc 1
@@ -54,7 +57,10 @@
               fn (y)
                 fn (z) (Ap x z y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'I $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def I
             fn (x) x
@@ -75,13 +81,18 @@
                 fn (x)
                   Ap f x $ g x
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ ->
+              Fn Z $ -> Dynamic
+            :generics X Y Z
         'W $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def W
             fn (x)
               fn (y) (Ap x y y)
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn X
+            -> $ Fn Y $ -> Dynamic
+            :generics X Y
         'Y $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Y
             Ap S I $ Ap S I I $ Ap B (Ap S I) (Ap S I I)
