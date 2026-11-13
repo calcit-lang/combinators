@@ -12,7 +12,8 @@
     "combinators.main/c-not": "partial",
     "combinators.main/c-or": "partial",
     "combinators.main/c-pair": "partial",
-    "combinators.main/c-right": "partial"
+    "combinators.main/c-right": "partial",
+    "combinators.main/c-succ": "partial"
   },
   "weak": {
     "combinators.core/Ap": {
