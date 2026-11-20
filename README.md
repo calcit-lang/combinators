@@ -46,6 +46,8 @@ defn main! ()
 
 `c-succ` 现在将传入的前驱保存在后继对中：`Ap c-right (Ap c-succ x)` 返回 `x`。此前实现忽略了 `x`，还会返回多一层函数；依赖该错误行为的代码需要调整。`c-succ` 的签名同步为接收前驱并返回一层选择器函数，最终结果仍保留开放的 `Dynamic` 边界。
 
+`S` 现在通过 `Ap` 应用第二个参数，因此 `Ap S 'f 'g 'x` 能构造符号表达式 `[] ([] 'f 'x) ([] 'g 'x)`；此前会把符号 `g` 当函数调用并报错。
+
 此前 [issue #17](https://github.com/calcit-lang/combinators/issues/17) 修正了 B 的函数复合：`B f g x = f (g x)`。
 `Ap B inc inc 1` 返回 3，符号形式 `Ap B 'f 'g 'x` 保留为 `[] 'f ([] 'g 'x)`；原附带定律保留。
 依赖旧 B 错误行为的实验会改变结果，但这不是本次 CLI patch 的新行为，也不代表 Y 等其他组合子已完成语义验收。

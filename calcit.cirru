@@ -79,12 +79,21 @@
             fn (f)
               fn (g)
                 fn (x)
-                  Ap f x $ g x
+                  Ap f x $ Ap g x
           :examples $ []
           :schema $ quote $ Fn X
             -> $ Fn Y $ ->
               Fn Z $ -> Dynamic
             :generics X Y Z
+          :tests $ [] $ %{} 'TestEntry (:name |application)
+            :code $ quote $ do
+              assert=
+                [] ([] 'f 'x) ([] 'g 'x)
+                Ap S 'f 'g 'x
+              assert= 7 $ Ap S
+                fn (a)
+                  fn (b) (+ a b)
+                , inc 3
         'W $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def W
             fn (x)
