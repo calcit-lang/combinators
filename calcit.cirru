@@ -79,12 +79,21 @@
             fn (f)
               fn (g)
                 fn (x)
-                  Ap f x $ g x
+                  Ap f x $ Ap g x
           :examples $ []
           :schema $ quote $ Fn X
             -> $ Fn Y $ ->
               Fn Z $ -> Dynamic
             :generics X Y Z
+          :tests $ [] $ %{} 'TestEntry (:name |application)
+            :code $ quote $ do
+              assert=
+                [] ([] 'f 'x) ([] 'g 'x)
+                Ap S 'f 'g 'x
+              assert= 7 $ Ap S
+                fn (a)
+                  fn (b) (+ a b)
+                , inc 3
         'W $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def W
             fn (x)
@@ -185,12 +194,18 @@
               Ap c-right $ Ap c-pair :left :right
         'c-succ $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-succ
-            fn (x) (Ap c-pair c-false)
+            fn (x) (Ap c-pair c-false x)
           :examples $ []
           :schema $ quote $ Fn X
-            -> $ Fn Y $ ->
-              Fn Z $ -> Dynamic
-            :generics X Y Z
+            -> $ Fn Y $ -> Dynamic
+            :generics X Y
+          :tests $ [] $ %{} 'TestEntry (:name |preserves-predecessor)
+            :code $ quote $ do
+              assert= :first $ Ap c-right $ Ap c-succ :first
+              assert= :second $ Ap c-right $ Ap c-succ :second
+              assert= :no $ Ap c-left (Ap c-succ :first) :yes :no
+              assert= :first $ Ap c-right $ Ap c-right
+                Ap c-succ $ Ap c-succ :first
         'c-true $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def c-true
             fn (x)
