@@ -11,7 +11,7 @@ SKI 与 BCKW 组合子实验，使用正式 Calcit **0.44.0** 原生运行。
 升级后使用 Calcit 0.44.0 运行下方命令。官方 `edit format` 检查 Snapshot 的规范写法。
 CI 使用 `analyze weak-types` 和 `config/weak-types-budget.json` 检查逐定义覆盖率及动态类型上限。
 `Ap` 同时处理函数与符号，额外参数仍按原顺序左折叠；符号输入构造嵌套 List，不改写为普通函数调用。
-`display-name` 对非已知组合子保留原值，因此仍是开放返回边界，不伪造 String 返回类型。已审查剩余高阶/符号边界：`Ap` 的任意函数结果与符号 List 可继续互相应用，无法在保持公开行为的同时穷举为有限 union；既有 I/K 泛型合同保持，不为计数添加最终仍含 Dynamic 的空壳 union。
+`display-name` 对非已知组合子保留原值，因此仍是开放返回边界，不伪造 String 返回类型；Calcit 0.44 的 union 暂不支持泛型成员，不能表达任意输入类型与 Symbol 的联合。已审查剩余高阶/符号边界：`Ap` 的任意函数结果与符号 List 可继续互相应用，无法在保持公开行为的同时穷举为有限 union；既有 I/K 泛型合同保持，不为计数添加最终仍含 Dynamic 的空壳 union。
 
 ## 运行与门禁
 
@@ -28,7 +28,7 @@ calcit calcit.cirru test --require-match
 calcit calcit.cirru
 ```
 
-保留原完整 strict、两个命名空间的 22 个定义、动态方法零发现检查、七项定律与回归及五项演示。
+保留原完整 strict、两个命名空间的 22 个定义、动态方法零发现检查、九项定律与回归及五项演示。
 本地和 CI 运行同一个逐定义预算检查，`data-dynamic` 的预算为零。现有 schemaDynamic/unresolved 18、typeNotFull 3、typeNone 1 的预算继续生效。
 这些指标描述既有边界，不替代严格检查或证明所有高阶组合子完整类型化。
 
