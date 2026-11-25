@@ -5,7 +5,7 @@
     "combinators.core/C": "partial",
     "combinators.core/S": "partial",
     "combinators.core/W": "partial",
-    "combinators.core/Y": "none",
+    "combinators.core/Y": "partial",
     "combinators.core/display-name": "partial",
     "combinators.main/c-and": "partial",
     "combinators.main/c-left": "partial",
