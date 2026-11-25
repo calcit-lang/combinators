@@ -104,9 +104,22 @@
             :generics X Y
         'Y $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Y
-            Ap S I $ Ap S I I $ Ap B (Ap S I) (Ap S I I)
+            fn (f)
+              fn (x)
+                Ap
+                  Ap f $ Y f
+                  , x
           :examples $ []
-          :schema $ quote Dynamic
+          :schema $ quote $ Fn F
+            -> $ Fn X $ -> Dynamic
+            :generics F X
+          :tests $ [] $ %{} 'TestEntry (:name |fixed-point)
+            :code $ quote $ let
+                factorial $ Y $ fn (recur-factorial)
+                  fn (n)
+                    if (< n 2) 1 $ * n $ recur-factorial (dec n)
+              assert= 120 $ factorial 5
+            :tags $ #{} :unit
         'display-name $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn display-name (x)
             cond
